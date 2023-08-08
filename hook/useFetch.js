@@ -5,49 +5,49 @@ import axios from "axios";
 // const rapidApiKey = RAPID_API_KEY;
 
 const useFetch = (endpoint, query) => {
-    const [data, setData ] = useState([]);
-    const [isLoading, setIsLoading ] = useState(false);
-    const [error, setError ] = useState(null);
+  const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
 
-    const options = {
-        method: 'GET',
-        url: `https://jsearch.p.rapidapi.com/${endpoint}`,
-        params: {
-          ...query
-        },
-        headers: {
-        //   'X-RapidAPI-Key': rapidApiKey,
-          'X-RapidAPI-Key': 'bd981ed48emshcb0cd18791f75ecp1762cbjsn7ead77a9689f',
-          'X-RapidAPI-Host': 'jsearch.p.rapidapi.com'
-        }
-      };
+  const options = {
+    method: "GET",
+    url: `https://jsearch.p.rapidapi.com/${endpoint}`,
+    params: {
+      ...query,
+    },
+    headers: {
+      //   'X-RapidAPI-Key': rapidApiKey,
+      "X-RapidAPI-Key": "502262d9f7msh6752deb5d7139c7p182020jsn8962831b2dc3",
+      "X-RapidAPI-Host": "jsearch.p.rapidapi.com",
+    },
+  };
 
-      const fetchData = async () => {
-        setIsLoading(true);
+  const fetchData = async () => {
+    setIsLoading(true);
 
-        try {
-            const response = await axios.request(options);
+    try {
+      const response = await axios.request(options);
 
-            setData(response.data.data);
-            setIsLoading(false);
-        }catch (error){
-            setError(error);
-            alert('There is an error');
-        }finally {
-            setIsLoading(false);
-        }
-      }
+      setData(response.data.data);
+      setIsLoading(false);
+    } catch (error) {
+      setError(error);
+      alert("There is an error");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
-      useEffect(() => {
-        fetchData();
-      }, []);
+  useEffect(() => {
+    fetchData();
+  }, []);
 
-      const refetch = () => {
-        setIsLoading(true);
-        fetchData();
-      }
+  const refetch = () => {
+    setIsLoading(true);
+    fetchData();
+  };
 
-      return { data, isLoading, error, refetch}
-}
+  return { data, isLoading, error, refetch };
+};
 
 export default useFetch;

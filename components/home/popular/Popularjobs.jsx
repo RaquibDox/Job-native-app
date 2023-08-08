@@ -15,7 +15,7 @@ import useFetch from "../../../hook/useFetch";
 
 const Popularjobs = () => {
   const router = useRouter();
-  const { data, isLoading, error } = useFetch("search", {
+  const { data, isLoading, error, refetch } = useFetch("search", {
     query: "React developer",
     num_pages: "1",
   });
@@ -31,7 +31,7 @@ const Popularjobs = () => {
     <View style={styles.container}>
       <View style={styles.header}>
         <Text style={styles.headerTitle}>Popular jobs</Text>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=>{refetch()}}>
           <Text style={styles.headerBtn}>Show all</Text>
         </TouchableOpacity>
       </View>

@@ -9,6 +9,8 @@ import {
   Welcome,
 } from "../components";
 
+// import Popularjobs from "../components/home/popular/Popularjobs";
+
 const Home = () => {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
@@ -17,7 +19,7 @@ const Home = () => {
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
       <Stack.Screen
         options={{
-          headerStyle: { backgroundColor: COLORS.lightwhite },
+          headerStyle: { backgroundColor: COLORS.lightWhite },
           headerShadowVisible: false,
           headerLeft: () => (
             <ScreenHeaderBtn iconUrl={icons.menu} dimension="60%" />
