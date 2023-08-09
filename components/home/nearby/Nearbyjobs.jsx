@@ -1,3 +1,5 @@
+import { useEffect } from 'react'
+
 import { 
   View, Text, TouchableOpacity, ActivityIndicator 
 } from 'react-native'
@@ -10,12 +12,16 @@ import { COLORS } from '../../../constants'
 import NearbyJobCard from '../../common/cards/nearby/NearbyJobCard';
 import useFetch from '../../../hook/useFetch'
 
-const Nearbyjobs = () => {
+const Nearbyjobs = ({initiateReftch}) => {
   const router = useRouter();
-  const { data, isLoading, error } = useFetch("search", {
+  const { data, isLoading, error, refetch } = useFetch("search", {
     query: "React developer",
     num_pages: "1",
   });
+
+  // useEffect(() => {
+  //   refetch();
+  // },[initiateReftch])
 
   return (
     <View style={styles.container}>

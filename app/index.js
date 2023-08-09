@@ -1,5 +1,11 @@
-import { useState } from "react";
-import { View, Text, ScrollView, SafeAreaView } from "react-native";
+import { useState, useCallback } from "react";
+import {
+  View,
+  Text,
+  ScrollView,
+  SafeAreaView,
+  RefreshControl,
+} from "react-native";
 import { Stack, useRouter } from "expo-router";
 import { COLORS, icons, images, SIZES } from "../constants";
 import {
@@ -14,6 +20,14 @@ import {
 const Home = () => {
   const router = useRouter();
   const [searchTerm, setSearchTerm] = useState("");
+  const [refreshing, setRefreshing] = useState(false);
+  const [initiateReftch, setInitiateReftch] = useState(0);
+
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    setInitiateReftch((prev) => prev + 1);
+    setRefreshing(false);
+  }, []);
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.lightWhite }}>
@@ -31,7 +45,12 @@ const Home = () => {
         }}
       />
 
-      <ScrollView showsVerticalScrollIndicator={false}>
+      <ScrollView
+        showsVerticalScrollIndicator={false}
+        refreshControl={
+          <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+        }
+      >
         <View
           style={{
             flex: 1,
@@ -48,8 +67,8 @@ const Home = () => {
             }}
           />
 
-          <Popularjobs />
-          <Nearbyjobs />
+          <Popularjobs initiateReftch={initiateReftch} />
+          <Nearbyjobs initiateReftch={initiateReftch} />
         </View>
       </ScrollView>
     </SafeAreaView>

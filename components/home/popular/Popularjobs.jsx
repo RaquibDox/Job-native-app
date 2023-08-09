@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "expo-router";
 import {
   View,
@@ -13,7 +13,7 @@ import { COLORS, SIZES } from "../../../constants";
 import PopularJobCard from "../../common/cards/popular/PopularJobCard";
 import useFetch from "../../../hook/useFetch";
 
-const Popularjobs = () => {
+const Popularjobs = ({initiateReftch}) => {
   const router = useRouter();
   const { data, isLoading, error, refetch } = useFetch("search", {
     query: "React developer",
@@ -26,6 +26,10 @@ const Popularjobs = () => {
     router.push(`/job-details/${item.job_id}`);
     setSelectedJob(item.job_id);
   };
+
+  useEffect(() => {
+    refetch();
+  },[initiateReftch])
 
   return (
     <View style={styles.container}>
